@@ -1,12 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Augmented Reality Web Applications</title>
-</head>
+<script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+<!-- we import arjs version without NFT but with marker + location based support -->
+<!--<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>-->
+<script src="build/aframe-ar.js"></script>
 
-<body>
-    <br><a href="marker_based/index.html">Marker-Based</a>
-    <br><a href="location_based/index.html">Location-Based</a>
-    <br><a href="location_based/syros.html">Syros Location-Based</a>
+<!-- particles system component -->
+<script
+    src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+
+<!-- speech command component -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.5.0/annyang.min.js"></script>
+<script src="build/aframe-speech-command-component.js"></script>
+
+
+<body style="margin : 0px; overflow: hidden;">
+    <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded
+        arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+
+
+        <a-entity id="annyang" annyang-speech-recognition></a-entity>
+        <a-entity id="electraef"
+            speech-command__start="command:start; type: attribute; attribute: visible; targetElement: #rain; value: true;"
+            speech-command__stop="command:stop; type: attribute; attribute: visible; targetElement: #rain;  value: false;">
+        </a-entity>
+        <a-entity id="rain" position="0 6 -15" particle-system="color: #92D2D2"></a-entity>
+
+        <a-marker preset="hiro">
+            <a-entity id="cube" geometry="primitive: box; width: 0.7; depth: 0.7; height: 0.7" position="0 0 0"
+                material="color: #EEE09A"></a-entity>
+            <a-entity id="cylinder" geometry="primitive: cylinder;  height: 0.7; radius: 0.4" position="-1.7 0 0"
+                material="color: #DAF7A6 "></a-entity>
+            <a-entity id="shpere" geometry="primitive: sphere; radius: 0.4" position="1.7 0 0" material="color:#A89AEE">
+            </a-entity>
+
+        </a-marker>
+
+
+        <a-entity camera></a-entity>
+    </a-scene>
 </body>
 
+</html>
